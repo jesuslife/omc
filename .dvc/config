@@ -1,0 +1,5 @@
+[core]
+    remote = storage
+['remote "storage"']
+    url = gs://test-computer-vision2/omc
+    version_aware = true
