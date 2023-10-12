@@ -142,3 +142,10 @@ outs:
       storage:
         etag: 08e4b99096d7dd81031001
         version_id: '1696466762734820'
+  - relpath: ardilla/raw/empty
+    md5: d41d8cd98f00b204e9800998ecf8427e
+    size: 0
+    cloud:
+      storage:
+        etag: 0893f0dad2d2f181031001
+        version_id: '1697152742373395'
