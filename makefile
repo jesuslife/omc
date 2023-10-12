@@ -1,5 +1,4 @@
 branch:
 	@echo "## Creating branch in current repository"
-	git fetch --all
-	git pull
+	git checkout -b feature/new-raw-data develop
 
