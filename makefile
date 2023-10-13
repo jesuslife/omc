@@ -8,6 +8,7 @@ branch:
 
 login:
 	@echo "Please login to your account"
+	gcloud auth application-default login
 
 push-video:
 	@echo "## Pushing data to bucket with DVC"
