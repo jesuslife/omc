@@ -18,12 +18,22 @@ dev:
 
 login:
 	@echo "Please login to your account"
-	gcloud auth application-default login
+	gcloud auth login
+	gcloud config set project ferrous-amphora-398306
+	mkdir data/ardilla/raw
+
+update-data:
+	@echo "## Downloading data from bucket with DVC"
+	. $(SRC_DIR)/.venv/bin/activate \
+	&& dvc pull
 
 push-video:
 	@echo "## Pushing data to bucket with DVC"
-#	dvc add data/
-	dvc push -r storage
+	. $(SRC_DIR)/.venv/bin/activate \
+	&& dvc add data/ \
+	&& dvc push -r storage
+
+
 
 push-branch:
 	@echo "## Pushing branch to git repository"
