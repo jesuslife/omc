@@ -1,10 +1,21 @@
 BRANCH_NAME := feature/new-raw-data
+SRC_DIR := /code/app/src
 
 .SILENT:
 
-branch:
+git-config: email-user
+	@echo "## Configuring  repository"
+	git config --global --add safe.directory /root/Models/omc
+	git config --global user.email email-user
+	
+branch: dev
 	@echo "## Creating branch in current repository"
-	git checkout -b $(BRANCH_NAME) develop
+	git branch $(BRANCH_NAME)
+	git switch $(BRANCH_NAME)
+	
+dev: 
+	git branch -f develop origin/develop
+	git switch develop
 
 login:
 	@echo "Please login to your account"
@@ -20,5 +31,9 @@ push-branch:
 	git add .
 	git commit -m "new videos added in data/raw folder"
 	git push -u origin $(BRANCH_NAME)
-
-
+	
+	
+test:
+	@echo "## testing dvc"
+	. $(SRC_DIR)/.venv/bin/activate \
+	&& dvc doctor
