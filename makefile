@@ -3,10 +3,9 @@ SRC_DIR := /code/app/src
 
 .SILENT:
 
-git-config: email-user
+git-config:
 	@echo "## Configuring  repository"
 	git config --global --add safe.directory /root/Models/omc
-	git config --global user.email email-user
 	
 branch: dev
 	@echo "## Creating branch in current repository"
