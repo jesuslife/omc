@@ -1,11 +1,13 @@
 BRANCH_NAME := feature/new-raw-data
 SRC_DIR := /code/app/src
+PROJECT := ferrous-amphora-398306
 
 .SILENT:
 
 git-config:
 	@echo "## Configuring  repository"
 	git config --global --add safe.directory /root/Models/omc
+	git config user.name = "from Docker container"
 	
 branch: dev
 	@echo "## Creating branch in current repository"
@@ -19,10 +21,11 @@ dev:
 login:
 	@echo "Please login to your account"
 	gcloud auth login
-	gcloud config set project ferrous-amphora-398306
-	mkdir data/ardilla/raw
+	gcloud auth application-default login
+	gcloud config set project $(PROJECT)
+	mkdir -p data/ardilla/raw
 
-update-data:
+pull-data:
 	@echo "## Downloading data from bucket with DVC"
 	. $(SRC_DIR)/.venv/bin/activate \
 	&& dvc pull
@@ -32,8 +35,6 @@ push-video:
 	. $(SRC_DIR)/.venv/bin/activate \
 	&& dvc add data/ \
 	&& dvc push -r storage
-
-
 
 push-branch:
 	@echo "## Pushing branch to git repository"
