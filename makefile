@@ -8,6 +8,8 @@ git-config:
 	@echo "## Configuring  repository"
 	git config --global --add safe.directory /root/Models/omc
 	git config user.name = "from Docker container"
+	git pull
+	git branch -r | grep -v 'main'| while read remote; do git branch -f "${remote#origin/}" "$remote";done
 	
 branch: dev
 	@echo "## Creating branch in current repository"
