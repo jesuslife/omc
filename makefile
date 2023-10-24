@@ -45,4 +45,4 @@ push-branch: # exec : make push-branch mail=yourmail@conceivable.life
 test:
 	@echo "## testing dvc"
 	. $(SRC_DIR)/.venv/bin/activate \
-	&& dvc fetch
+	&& dvc diff
