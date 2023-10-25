@@ -15,7 +15,6 @@ branch:
 	git switch develop
 	git branch $(BRANCH_NAME)
 	git switch $(BRANCH_NAME)
-	mkdir -p data/ardilla/raw
 	
 login:
 	@echo "Please login to your account"
@@ -38,11 +37,10 @@ push-video:
 push-branch: # exec : make push-branch mail=yourmail@conceivable.life
 	@echo "## Pushing branch to git repository"
 	git config --global user.email = "test@test" 
-	git add .
-	git commit -m "new videos added in data/raw folder and uploaded to bucket with DVC"
+	git add . | if read line; then git commit -m "new videos added in data/raw folder and uploaded to bucket with DVC";else echo  "\t no commit added due to there are no changes";fi
 	git push -u origin $(BRANCH_NAME)
 	
 test:
 	@echo "## testing dvc"
 	. $(SRC_DIR)/.venv/bin/activate \
-	&& dvc diff
+	&& dvc status
